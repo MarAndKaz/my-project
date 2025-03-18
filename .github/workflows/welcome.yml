@@ -11,9 +11,8 @@ jobs:
       - name: Send a welcome message
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          WELCOME_MESSAGE: |
-            Добро пожаловать! 🎉 Спасибо, что присоединились к нашему проекту!
-        run: |
-          echo "${WELCOME_MESSAGE}" >> issue_comment.txt
-          gh issue comment ${{ github.event.issue.number }} --body-file issue_comment.txt
+      with:
+        message: Добро пожаловать! Спасибо, что присоединились к нашему проекту!
+
+
           
