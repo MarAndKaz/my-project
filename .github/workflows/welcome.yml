@@ -5,17 +5,18 @@ on:
     types: [opened]
 
 jobs:
-  welcome:
+  add_comment:
     runs-on: ubuntu-latest
     steps:
-      - name: Send a welcome message
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          WELCOME_MESSAGE: |
-            Добро пожаловать! Спасибо, что присоединились к нашему проекту!
-        run: |
-          echo "${WELCOME_MESSAGE}" 
-          gh issue comment ${{ github.event.issue.number }} 
+      - name: Add comment to issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Привет! Спасибо за создание issue.'
+            })
 
-
-          
