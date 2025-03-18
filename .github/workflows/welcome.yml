@@ -1,4 +1,7 @@
-name: Welcome New Contributor
+- name: View context attributes
+  uses: actions/github-script@v7
+  with:
+    script: console.log(context)
 
 on:
   issues:
